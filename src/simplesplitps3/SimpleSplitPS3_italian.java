@@ -85,17 +85,17 @@ public class SimpleSplitPS3
     private void createAndShowGUI()
     {
         join = new JRadioButton("Join");
-        split = new JRadioButton("Split");
-        delete = new JCheckBox("Delete");
-        rename = new JCheckBox("Rename");
-        change = new JCheckBox("Change");
-        recreate = new JCheckBox("Recreate");
+        split = new JRadioButton("Splitta");
+        delete = new JCheckBox("Cancella");
+        rename = new JCheckBox("Rinomina");
+        change = new JCheckBox("Cambia");
+        recreate = new JCheckBox("Ricreare");
         filesFound = new JLabel(" ", null, JLabel.CENTER);
         info = new JLabel(":: Developed by Dermy ::", null, JLabel.CENTER);
         fileProgress = new JProgressBar();
         totalProgress = new JProgressBar();
 
-        search = new JButton("Search For Files");
+        search = new JButton("Cerca per Files");
         search.addActionListener(new ActionListener()
         {
             @Override
@@ -103,8 +103,8 @@ public class SimpleSplitPS3
             {
                 searcher = new JFileChooser();
                 searcher.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
-                searcher.setDialogTitle("Search A Directory Recursively");
-                searcher.setApproveButtonText("Search");
+                searcher.setDialogTitle("Cercare una Directory ricorsivamente");
+                searcher.setApproveButtonText("Cerca");
 
                 int option = searcher.showOpenDialog(jframe);
 
@@ -119,13 +119,13 @@ public class SimpleSplitPS3
 
                         if(join.isSelected())
                         {
-                            message = "No " + EXTENSION_TEXT + " files found.";
+                            message = "No " + EXTENSION_TEXT + " files non trovato.";
                         }//if
 
                         else if(split.isSelected())
                         {
-                            message = "No files greater than or equal to 4 "
-                                    + "GiB found.";
+                            message = "Nessun file maggiore o uguale a 4 "
+                                    + "GiB tovato.";
                         }//else if
 
                         JOptionPane.showMessageDialog(jframe, message, TITLE,
@@ -291,7 +291,7 @@ public class SimpleSplitPS3
 
         catch(IOException ex)
         {
-            quit("Error occurred while searching for files.");
+            quit("Si è verificato un errore durante la ricerca di file.");
         }//catch
 
         treeList.add(filesToSplitOrJoin);
@@ -325,8 +325,8 @@ public class SimpleSplitPS3
     {
         JFileChooser chooser = new JFileChooser();
         chooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
-        chooser.setDialogTitle("Choose A Destination Directory");
-        chooser.setApproveButtonText("Choose");
+        chooser.setDialogTitle("Scegliere una Directory di destinazione");
+        chooser.setApproveButtonText("Scegliere");
 
         int option = chooser.showOpenDialog(jframe);
 
@@ -343,7 +343,7 @@ public class SimpleSplitPS3
     {
         int filesJoined = 0;
         filesFound.setText(treeList.get(0).size() + " " + EXTENSION_TEXT +
-            " File(s) Found");
+            " File(s) Trovato");
 
         ArrayList<TreeSet<Path>> subsets = makeSubsets(treeList.get(0));
         String filename;
@@ -372,7 +372,7 @@ public class SimpleSplitPS3
     private void split(ArrayList<TreeSet<Path>> treeList)
     {
         int filesSplit = 0;
-        filesFound.setText(treeList.get(0).size() + " Large File(s) Found");
+        filesFound.setText(treeList.get(0).size() + " File di grande dimensione(i) Trovato");
 
         for(Path largeFile : treeList.get(0))
         {
@@ -514,7 +514,7 @@ public class SimpleSplitPS3
 
         catch(IOException ex)
         {
-            quit("Error occurred while joining " + joinedName + ".");
+            quit("Errore durante il joining " + joinedName + ".");
         }//catch
 
         return destinationFolderToRename;
@@ -616,7 +616,7 @@ public class SimpleSplitPS3
 
         catch(IOException ex)
         {
-            quit("Error occurred while splitting " + largeFile.getFileName().
+            quit("Errore durante la divisione dei file " + largeFile.getFileName().
                     toString() + ".");
         }//catch
 
@@ -634,7 +634,7 @@ public class SimpleSplitPS3
 
             catch(IOException ex)
             {
-                quit("Error occurred while deleting " +
+                quit("Si è verificato un errore durante l'eliminazione " +
                         deleteThis.getFileName().toString() + ".");
             }//catch
         }//for
@@ -673,7 +673,7 @@ public class SimpleSplitPS3
 
             catch(IOException ex)
             {
-                quit("Error while renaming " + path.getFileName() + ".");
+                quit("Errore durante la rinominazione " + path.getFileName() + ".");
             }//catch
         }//for
     }//renameFolders
@@ -736,7 +736,7 @@ public class SimpleSplitPS3
         public void done()
         {
             filesFound.setText(" ");
-            info.setText("Task(s) Completed Successfully");
+            info.setText("Attivita' completata");
             jframe.pack();
             fileProgress.setValue(0);
             join.setEnabled(true);
